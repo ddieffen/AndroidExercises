@@ -52,11 +52,14 @@ package edu.vuum.mocca.ui.story;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,9 +87,9 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
         try {
             StoryData item = getItem(position);
 
-            long KEY_ID = item.KEY_ID;
             String title = item.title;
             long creationTime = item.storyTime;
+            String imagePath = item.imageLink;
             
             if (convertView == null) {
                 todoView = new LinearLayout(getContext());
@@ -98,17 +101,23 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
                 todoView = (LinearLayout) convertView;
             }
 
-            TextView KEY_IDTV = (TextView) todoView
-            		.findViewById(R.id.story_listview_custom_row_KEY_ID_textView);
             
             TextView titleTV = (TextView) todoView
                     .findViewById(R.id.story_listview_custom_row_title_textView);
             TextView creationTimeTV = (TextView) todoView
                     .findViewById(R.id.story_listview_custom_row_creation_time_textView);
+            ImageView imageTV = (ImageView) todoView
+            		.findViewById(R.id.story_listview_custom_row_image);
             
-            KEY_IDTV.setText("" + KEY_ID);
+            if(title != "")
+            	title = Character.toUpperCase(title.charAt(0)) + title.substring(1);
             titleTV.setText("" + title);
+            
             creationTimeTV.setText("" + StoryData.FORMAT.format(creationTime));
+       
+            imageTV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            imageTV.setImageBitmap(decodeSampledBitmapFromResource(imagePath, 100, 100));
+            
             Log.i("StoryDataArrayAdaptor", String.valueOf(item.creationTime));
             
         } catch (Exception e) {
@@ -117,6 +126,44 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
                     Toast.LENGTH_SHORT).show();
         }
         return todoView;
+    }
+    
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+	    // Raw height and width of image
+	    final int height = options.outHeight;
+	    final int width = options.outWidth;
+	    int inSampleSize = 1;
+	
+	    if (height > reqHeight || width > reqWidth) {
+	
+	        final int halfHeight = height / 2;
+	        final int halfWidth = width / 2;
+	
+	        // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+	        // height and width larger than the requested height and width.
+	        while ((halfHeight / inSampleSize) > reqHeight
+	                && (halfWidth / inSampleSize) > reqWidth) {
+	            inSampleSize *= 2;
+	        }
+	    }
+	    return inSampleSize;
+    }
+    
+    public static Bitmap decodeSampledBitmapFromResource(String fileName,
+            int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(fileName, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(fileName, options);
     }
 
 }

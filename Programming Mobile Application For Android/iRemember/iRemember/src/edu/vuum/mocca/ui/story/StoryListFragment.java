@@ -51,13 +51,11 @@ package edu.vuum.mocca.ui.story;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -65,9 +63,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 import edu.vanderbilt.mooc.R;
 import edu.vuum.mocca.orm.MoocResolver;
 import edu.vuum.mocca.orm.StoryData;
@@ -145,8 +140,6 @@ public class StoryListFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.story_listview, container, false);
-		// get the ListView that will be displayed
-		ListView lv = (ListView) view.findViewById(android.R.id.list);
 
 		filterET = (EditText) view
 				.findViewById(R.id.story_listview_tags_filter);
@@ -170,8 +163,6 @@ public class StoryListFragment extends ListFragment {
 			}
 		});
 
-		// customize the ListView in whatever desired ways.
-		lv.setBackgroundColor(Color.GRAY);
 		// return the parent view
 		return view;
 	}

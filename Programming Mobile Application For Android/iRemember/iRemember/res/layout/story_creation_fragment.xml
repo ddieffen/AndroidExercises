@@ -45,13 +45,12 @@ University of Maryland. This license grants no permission to call
 products or services derived from the iRemember source, nor does it
 grant permission for the name Vanderbilt University or
 University of Maryland to appear in their names.
-  -->
-  
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/StoryEditRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray"
+    android:background="@color/white"
     android:orientation="horizontal" >
 
     <ScrollView
@@ -62,71 +61,42 @@ University of Maryland to appear in their names.
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="55dp" >
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/storyRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
             <!-- title label/value pair -->
 
-            <TextView
-                android:id="@+id/story_create_label_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_title"
-                android:layout_alignBottom="@+id/story_create_value_title"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_title" />
-
             <EditText
                 android:id="@+id/story_create_value_title"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/story_create_value_story_id"
+                android:hint="Title..."
                 android:inputType="text"
-                android:text="@string/story_create_title_default_value" />
+                android:text="@string/story_create_title_default_value" >
+                <requestFocus />
+            </EditText>
 
             <!-- body label/value pair -->
 
-            <TextView
-                android:id="@+id/story_create_label_body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_body"
-                android:layout_alignBottom="@+id/story_create_value_body"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_body" />
-
             <EditText
                 android:id="@+id/story_create_value_body"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/story_create_value_title"
-                android:inputType="text"
+                android:hint="Story..."
+                android:inputType="textMultiLine"
+                android:lines="4"
                 android:text="@string/story_create_body_default_value" />
 
             <!-- audio_link label/value pair -->
-
-            <TextView
-                android:id="@+id/story_create_label_audio_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_audio_link"
-                android:layout_alignBottom="@+id/story_create_value_audio_link"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_audio_link" />
-
-            <Button
-                android:id="@+id/story_create_value_audio_link"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_body"
-                android:onClick="addAudioClicked"
-                android:text="Add Audio" />
 
             <TextView
                 android:id="@+id/story_create_value_audio_location"
@@ -138,23 +108,58 @@ University of Maryland to appear in their names.
 
             <!-- video_link label/value pair -->
 
-            <TextView
-                android:id="@+id/story_create_label_video_link"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_video_button"
-                android:layout_alignBottom="@+id/story_create_value_video_button"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_video_link" />
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/story_create_value_video_button"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_audio_location"
-                android:onClick="addVideoClicked"
-                android:text="Add Video" />
+                <ImageButton
+                    android:id="@+id/story_create_value_video_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Record Video"
+                    android:onClick="addVideoClicked"
+                    android:src="@drawable/video" 
+                    android:background="@xml/custom_button_add"/>
+
+                <ImageButton
+                    android:id="@+id/story_create_value_location_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/story_create_value_video_button"
+                    android:contentDescription="Get Location"
+                    android:onClick="getLocationClicked"
+                    android:src="@drawable/location" 
+                    android:background="@xml/custom_button_add"
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/story_create_value_image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/story_create_value_location_button"
+                    android:contentDescription="Take Picture"
+                    android:onClick="addPhotoClicked"
+                    android:src="@drawable/camera"
+                    android:background="@xml/custom_button_add" 
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageButton
+                    android:id="@+id/story_create_value_audio_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/story_create_value_image_button"
+                    android:contentDescription="Record Audio"
+                    android:onClick="addAudioClicked"
+                    android:src="@drawable/microphone" 
+                    android:background="@xml/custom_button_add"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/story_create_value_video_location"
@@ -166,43 +171,19 @@ University of Maryland to appear in their names.
 
             <!-- image_name label/value pair -->
 
-            <TextView
-                android:id="@+id/story_create_label_image_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_image_name"
-                android:layout_alignBottom="@+id/story_create_value_image_name"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_image_name" />
+            <!-- image_meta_data label/value pair -->
 
             <EditText
                 android:id="@+id/story_create_value_image_name"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_video_location"
+                android:ems="10"
+                android:hint="Image Name..."
                 android:inputType="text"
-                android:text="@string/story_create_image_name_default_value" />
+                android:text="@string/story_create_image_name_default_value" >
 
-            <!-- image_meta_data label/value pair -->
-
-            <TextView
-                android:id="@+id/story_create_label_image_meta_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_image_button"
-                android:layout_alignBottom="@+id/story_create_value_image_button"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_image_meta_data" />
-
-            <Button
-                android:id="@+id/story_create_value_image_button"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_image_name"
-                android:onClick="addPhotoClicked"
-                android:text="Add Photo" />
+                
+            </EditText>
 
             <TextView
                 android:id="@+id/story_create_value_image_location"
@@ -212,91 +193,26 @@ University of Maryland to appear in their names.
                 android:layout_below="@+id/story_create_value_image_button"
                 android:text="" />
 
-            <!-- tags label/value pair -->
-
-            <!-- creation_time label/value pair -->
-
-            <!-- story_time label/value pair -->
-
-            <TextView
-                android:id="@+id/story_create_label_story_time"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_story_time"
-                android:layout_alignBottom="@+id/story_create_value_story_time"
-                android:layout_alignParentLeft="true"
-                android:text="@string/story_create_label_story_time" />
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/story_create_value_story_time"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_image_location"
-                android:inputType="text"
-                android:onClick="getDateClicked"
-                android:text="Click text to set" />
-            
-            <!-- latitude label/value pair -->
+                <ImageView
+                    android:id="@+id/story_create_value_story_time_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@xml/custom_button_add"
+                    android:contentDescription="Set Date"
+                    android:onClick="getDateClicked"
+                    android:src="@drawable/calendar" />
 
-            <TextView
-                android:id="@+id/story_create_label_location_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_location_button"
-                android:layout_alignBottom="@+id/story_create_value_location_button"
-                android:layout_alignParentLeft="true"
-                android:text="location button" />
+            </RelativeLayout>
 
-            <Button
-                android:id="@+id/story_create_value_location_button"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_story_time"
-                android:onClick="getLocationClicked"
-                android:text="Get Location" />
+        </LinearLayout>
 
-            <!-- longitude label/value pair -->
-
-            <TextView
-                android:id="@+id/story_create_label_latitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_latitude"
-                android:layout_alignBottom="@+id/story_create_value_latitude"
-                android:layout_alignParentLeft="true"
-                android:text="location" />
-
-            <TextView
-                android:id="@+id/story_create_value_latitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_location_button"
-                android:gravity="right"
-                android:text="0"
-                android:textAlignment="gravity" />
-
-            <TextView
-                android:id="@+id/story_create_label_longitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/story_create_value_longitude"
-                android:layout_alignBottom="@+id/story_create_value_longitude"
-                android:layout_alignParentLeft="true"
-                android:text="location" />
-
-            <TextView
-                android:id="@+id/story_create_value_longitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/story_create_value_latitude"
-                android:gravity="right"
-                android:text="0"
-                android:textAlignment="gravity" />
-        </RelativeLayout>
     </ScrollView>
 
     <Button
@@ -305,8 +221,12 @@ University of Maryland to appear in their names.
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:background="@xml/custom_button_add"
         android:layout_marginLeft="32dp"
-        android:text="@string/story_create_button_label_create" />
+        android:text="@string/story_create_button_label_create" 
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18dp"/>
 
     <Button
         android:id="@+id/story_create_button_reset"
@@ -314,7 +234,11 @@ University of Maryland to appear in their names.
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/story_create_button_label_clear" />
+        android:background="@xml/custom_button_add"
+        android:text="@string/story_create_button_label_clear"
+        android:textStyle="bold"
+        android:textColor="@color/white" 
+        android:textSize="18dp"/>
 
     <Button
         android:id="@+id/story_create_button_cancel"
@@ -323,6 +247,10 @@ University of Maryland to appear in their names.
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="21dp"
-        android:text="@string/story_create_button_label_cancel" />
+        android:background="@xml/custom_button_add"
+        android:text="@string/story_create_button_label_cancel"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
 
 </RelativeLayout>

@@ -45,15 +45,33 @@ University of Maryland. This license grants no permission to call
 products or services derived from the iRemember source, nor does it
 grant permission for the name Vanderbilt University or
 University of Maryland to appear in their names.
--->
 
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/storyListViewLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/white">
 
     <!-- Row for Buttons -->
+
+    <EditText
+        android:id="@+id/story_listview_tags_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/story_list_filter_hint" 
+        android:drawableRight="@drawable/search_icon">
+    </EditText>
+
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="341dp"
+        android:layout_weight="0.85" 
+        android:background="@color/white">
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,25 +84,13 @@ University of Maryland to appear in their names.
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@xml/custom_button_add"
             android:onClick="test"
-            android:text="@string/story_list_button_label_add" />
-
+            android:text="@string/story_list_button_label_add" 
+            android:paddingTop="4dp"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/story_listview_tags_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/story_list_filter_hint" >
-
-        <requestFocus />
-    </EditText>
-
-    <ListView
-        android:id="@+id/android:list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
 
 </LinearLayout>

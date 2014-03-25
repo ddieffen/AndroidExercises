@@ -53,7 +53,6 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,6 +66,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import edu.vanderbilt.mooc.R;
 import edu.vuum.mocca.orm.MoocResolver;
@@ -85,29 +85,22 @@ public class CreateStoryFragment extends Fragment {
 
 	EditText titleET;
 	EditText bodyET;
-	Button audioCaptureButton;
-	Button videoCaptureButton;
+	ImageButton audioCaptureButton;
+	ImageButton videoCaptureButton;
 	EditText imageNameET;
-	Button imageCaptureButton;
-	static TextView storyTimeET;
+	ImageButton imageCaptureButton;
 	Date date;
-	Button locationButton;
-
-	TextView imageLocation;
-	TextView videoLocation;
-	TextView audioLocation;
+	ImageButton locationButton;
 
 	Button buttonCreate;
 	Button buttonClear;
 	Button buttonCancel;
 
-	TextView latitudeValue;
-	TextView longitudeValue;
-
 	Uri imagePath;
 	Uri fileUri;
 	String audioPath;
 	Location loc;
+	static String storyTimeET;
 
 	// int index;
 	OnOpenWindowInterface mOpener;
@@ -161,30 +154,17 @@ public class CreateStoryFragment extends Fragment {
 				R.id.story_create_value_title);
 		bodyET = (EditText) getView()
 				.findViewById(R.id.story_create_value_body);
-		audioCaptureButton = (Button) getView().findViewById(
+		audioCaptureButton = (ImageButton) getView().findViewById(
 				R.id.story_create_value_audio_link);
-		videoCaptureButton = (Button) getView().findViewById(
+		videoCaptureButton = (ImageButton) getView().findViewById(
 				R.id.story_create_value_video_button);
 		imageNameET = (EditText) getView().findViewById(
 				R.id.story_create_value_image_name);
-		imageCaptureButton = (Button) getView().findViewById(
+		imageCaptureButton = (ImageButton) getView().findViewById(
 				R.id.story_create_value_image_button);
-		storyTimeET = (TextView) getView().findViewById(
-				R.id.story_create_value_story_time);
-		locationButton = (Button) getView().findViewById(
+		
+		locationButton = (ImageButton) getView().findViewById(
 				R.id.story_create_value_location_button);
-
-		imageLocation = (TextView) getView().findViewById(
-				R.id.story_create_value_image_location);
-		videoLocation = (TextView) getView().findViewById(
-				R.id.story_create_value_video_location);
-		audioLocation = (TextView) getView().findViewById(
-				R.id.story_create_value_audio_location);
-
-		latitudeValue = (TextView) getView().findViewById(
-				R.id.story_create_value_latitude);
-		longitudeValue = (TextView) getView().findViewById(
-				R.id.story_create_value_longitude);
 
 		buttonClear = (Button) getView().findViewById(
 				R.id.story_create_button_reset);
@@ -199,12 +179,6 @@ public class CreateStoryFragment extends Fragment {
 				titleET.setText("" + "");
 				bodyET.setText("" + "");
 				imageNameET.setText("" + "");
-				imageLocation.setText("" + "");
-				videoLocation.setText("" + "");
-				audioLocation.setText("" + "");
-				storyTimeET.setText("Click text to set");
-				latitudeValue.setText("" + "0");
-				longitudeValue.setText("" + "0");
 			}
 		});
 
@@ -230,11 +204,10 @@ public class CreateStoryFragment extends Fragment {
 				Editable titleCreateable = titleET.getText();
 				Editable bodyCreateable = bodyET.getText();
 				Editable imageNameCreateable = imageNameET.getText();
-				String storyTimeCreateable = storyTimeET.getText().toString();
 
 				// Try to parse the date into long format
 				try {
-					date = StoryData.FORMAT.parse(storyTimeCreateable.toString());
+					date = StoryData.FORMAT.parse(storyTimeET.toString());
 				} catch (ParseException e1) {
 					Log.e("CreateStoryFragment", "Date was not parsable, reverting to current time");
 					date = new Date();
@@ -314,7 +287,7 @@ public class CreateStoryFragment extends Fragment {
 			if (resultCode == CreateStoryActivity.RESULT_OK) {
 				// Image captured and saved to fileUri specified in the Intent
 				imagePathFinal = imagePath;
-				imageLocation.setText(imagePathFinal.toString());
+
 			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
@@ -325,7 +298,7 @@ public class CreateStoryFragment extends Fragment {
 				// Image captured and saved to fileUri specified in the Intent
 				// fileUriFinal = fileUri;
 				fileUri = data.getData();
-				videoLocation.setText(fileUri.toString());
+
 			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
@@ -337,7 +310,6 @@ public class CreateStoryFragment extends Fragment {
 				// Image captured and saved to fileUri specified in the Intent
 				// fileUriFinal = fileUri;
 				audioPath = (String) data.getExtras().get("data");
-				audioLocation.setText("file://" + audioPath.toString());
 			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
@@ -350,11 +322,7 @@ public class CreateStoryFragment extends Fragment {
 	public void setLocation(Location location) {
 		Log.d(LOG_TAG, "setLocation =" + location);
 		loc = location;
-		double latitude = loc.getLatitude();
-		double longitude = loc.getLongitude();
 
-		latitudeValue.setText("" + latitude);
-		longitudeValue.setText("" + longitude);
 	}
 	
 	static void setStringDate(int year, int monthOfYear, int dayOfMonth){
@@ -369,7 +337,7 @@ public class CreateStoryFragment extends Fragment {
 		if (dayOfMonth < 10)
 			day = "0" + dayOfMonth;
 		
-		storyTimeET.setText(year + "-" + mon + "-" + day);
+		storyTimeET = year + "-" + mon + "-" + day;
 		
 	}
 
@@ -378,7 +346,7 @@ public class CreateStoryFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.story_creation_fragment,
 				container, false);
-		container.setBackgroundColor(Color.GRAY);
+		
 		return view;
 	}
 

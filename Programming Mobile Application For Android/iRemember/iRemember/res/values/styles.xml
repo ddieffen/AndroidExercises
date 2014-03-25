@@ -3,5 +3,6 @@
 
 
     <style name="AppTheme" parent="android:Theme.Light" />
+	<style name="EditTheme" parent="android:Theme.Holo" />
 
 </resources>
