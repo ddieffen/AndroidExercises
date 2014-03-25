@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -69,13 +70,15 @@ public class PlaceViewAdapter extends CursorAdapter {
 		// the current set of PlaceRecords. Use the 
 		// getPlaceRecordFromCursor() method to add the
 		// current place to the list
-		
-
-            
-            
-            
-            
-            
+		list.clear();
+		int size = newCursor.getCount();
+		for	(int i = 0; i < size; i++)
+		{
+			if(!newCursor.moveToNext())
+				break;
+			
+			list.add(getPlaceRecordFromCursor(newCursor));
+		}
             // Set the NotificationURI for the new cursor
 			newCursor.setNotificationUri(mContext.getContentResolver(),
 					PlaceBadgesContract.CONTENT_URI);
@@ -146,13 +149,20 @@ public class PlaceViewAdapter extends CursorAdapter {
 			list.add(listItem);
 
 			// TODO - Insert new record into the ContentProvider
+			ContentResolver contentResolver = mContext.getContentResolver();
 
+			ContentValues values = new ContentValues();
+
+			// Insert records for each columns 
+			values.put(PlaceBadgesContract.COUNTRY_NAME, listItem.getCountryName());
+			values.put(PlaceBadgesContract.FLAG_BITMAP_PATH, listItem.getFlagBitmapPath());
+			values.put(PlaceBadgesContract.LAT, listItem.getLat());
+			values.put(PlaceBadgesContract.LON, listItem.getLon());
+			values.put(PlaceBadgesContract.PLACE_NAME, listItem.getPlace());
 			
-
-		
-        
-        
-        
+			// pushes the values to the content provider
+			@SuppressWarnings("unused")
+			Uri inserted = contentResolver.insert(PlaceBadgesContract.CONTENT_URI, values);
         }
 
 	}
@@ -166,10 +176,8 @@ public class PlaceViewAdapter extends CursorAdapter {
 		list.clear();
 
 		// TODO - delete all records in the ContentProvider
-
-
-        
-        
+		ContentResolver contentResolver = mContext.getContentResolver();
+		int deleted = contentResolver.delete(PlaceBadgesContract.CONTENT_URI, "", null);
         
 	}
 

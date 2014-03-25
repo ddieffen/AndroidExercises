@@ -9,8 +9,33 @@ import android.content.Intent;
 
 // Do not modify 
 
-public class ToDoItem {
+public class ToDoItem implements Comparable<ToDoItem> {
 
+	public int compareTo(ToDoItem compareItem) {
+		 
+		if(this.getStatus() != compareItem.getStatus())
+		{
+			if(this.getStatus() == Status.DONE)
+				return 1;
+			else
+				return -1;
+		}
+		else
+		{
+			if(this.getPriority().compareTo(compareItem.getPriority()) < 0)
+				return 1;
+			else if (this.getPriority().compareTo(compareItem.getPriority()) > 0)
+				return -1;
+			else
+			{
+				if(this.getDate().compareTo(compareItem.getDate()) > 0)
+					return 1;
+				else 
+					return -1;
+			}
+		}
+	}	
+	
 	public static final String ITEM_SEP = System.getProperty("line.separator");
 
 	public enum Priority {
@@ -112,5 +137,7 @@ public class ToDoItem {
 				+ ITEM_SEP + "Status:" + mStatus + ITEM_SEP + "Date:"
 				+ FORMAT.format(mDate);
 	}
+	
+	
 
 }
