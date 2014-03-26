@@ -49,11 +49,16 @@ University of Maryland to appear in their names.
 
 package edu.vuum.mocca.ui.story;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,10 +77,12 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
             .getCanonicalName();
 
     int resource;
+    Context mContext;
 
     public StoryDataArrayAdaptor(Context _context, int _resource,
             List<StoryData> _items) {
         super(_context, _resource, _items);
+        mContext = _context;
         Log.d(LOG_TAG, "constructor()");
         resource = _resource;
     }
@@ -90,6 +97,8 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
             String title = item.title;
             long creationTime = item.storyTime;
             String imagePath = item.imageLink;
+            String videoLinkPath = String.valueOf(item.videoLink).toString();
+            String videoPath = Utilities.getRealVideoPathFromURI(mContext,  Uri.parse(videoLinkPath));
             
             if (convertView == null) {
                 todoView = new LinearLayout(getContext());
@@ -108,16 +117,20 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
                     .findViewById(R.id.story_listview_custom_row_creation_time_textView);
             ImageView imageTV = (ImageView) todoView
             		.findViewById(R.id.story_listview_custom_row_image);
+            imageTV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             
             if(title != "")
             	title = Character.toUpperCase(title.charAt(0)) + title.substring(1);
             titleTV.setText("" + title);
             
             creationTimeTV.setText("" + StoryData.FORMAT.format(creationTime));
-       
-            imageTV.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            imageTV.setImageBitmap(decodeSampledBitmapFromResource(imagePath, 100, 100));
             
+            if(imagePath != null && !imagePath.equals("")){
+            	imageTV.setImageBitmap(Utilities.createSizedThumbnail(imagePath, 100, 100));
+            }
+            else if(videoPath != null && !videoPath.equals("")){
+            	imageTV.setImageBitmap(Utilities.createSizeVidoThumbnail(videoPath, 100,100));
+            }
             Log.i("StoryDataArrayAdaptor", String.valueOf(item.creationTime));
             
         } catch (Exception e) {
@@ -128,42 +141,6 @@ public class StoryDataArrayAdaptor extends ArrayAdapter<StoryData> {
         return todoView;
     }
     
-    public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-	    // Raw height and width of image
-	    final int height = options.outHeight;
-	    final int width = options.outWidth;
-	    int inSampleSize = 1;
-	
-	    if (height > reqHeight || width > reqWidth) {
-	
-	        final int halfHeight = height / 2;
-	        final int halfWidth = width / 2;
-	
-	        // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-	        // height and width larger than the requested height and width.
-	        while ((halfHeight / inSampleSize) > reqHeight
-	                && (halfWidth / inSampleSize) > reqWidth) {
-	            inSampleSize *= 2;
-	        }
-	    }
-	    return inSampleSize;
-    }
     
-    public static Bitmap decodeSampledBitmapFromResource(String fileName,
-            int reqWidth, int reqHeight) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(fileName, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(fileName, options);
-    }
 
 }

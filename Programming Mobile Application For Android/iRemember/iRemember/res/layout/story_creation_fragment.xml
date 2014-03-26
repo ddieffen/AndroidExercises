@@ -159,6 +159,18 @@ University of Maryland to appear in their names.
                     android:background="@xml/custom_button_add"
                     android:layout_marginLeft="10dp"/>
 
+                <ImageView
+                    android:id="@+id/story_create_value_story_time_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/story_create_value_audio_link"
+                    android:background="@xml/custom_button_add"
+                    android:contentDescription="Set Date"
+                    android:onClick="getDateClicked"
+                    android:src="@drawable/calendar"
+                    android:layout_marginLeft="10dp" />
+
             </RelativeLayout>
 
             <TextView
@@ -198,17 +210,6 @@ University of Maryland to appear in their names.
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <ImageView
-                    android:id="@+id/story_create_value_story_time_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@xml/custom_button_add"
-                    android:contentDescription="Set Date"
-                    android:onClick="getDateClicked"
-                    android:src="@drawable/calendar" />
-
             </RelativeLayout>
 
         </LinearLayout>
@@ -226,7 +227,8 @@ University of Maryland to appear in their names.
         android:text="@string/story_create_button_label_create" 
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:id="@+id/story_create_button_reset"
@@ -238,7 +240,8 @@ University of Maryland to appear in their names.
         android:text="@string/story_create_button_label_clear"
         android:textStyle="bold"
         android:textColor="@color/white" 
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:id="@+id/story_create_button_cancel"
@@ -251,6 +254,7 @@ University of Maryland to appear in their names.
         android:text="@string/story_create_button_label_cancel"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="18dp" />
+        android:textSize="18dp" 
+        android:layout_marginBottom="5dp"/>
 
 </RelativeLayout>
