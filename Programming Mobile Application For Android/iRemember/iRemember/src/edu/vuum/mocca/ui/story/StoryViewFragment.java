@@ -87,13 +87,7 @@ public class StoryViewFragment extends Fragment {
 
 	TextView titleTV;
 	TextView bodyTV;
-	Button audioButton;
 	VideoView videoLinkView;
-	TextView imageNameTV;
-	ImageView imageMetaDataView;
-	TextView storyTimeTV;
-	TextView latitudeTV;
-	TextView longitudeTV;
 
 	// buttons for edit and delete
 	Button editButton;
@@ -168,28 +162,10 @@ public class StoryViewFragment extends Fragment {
 		titleTV = (TextView) getView()
 				.findViewById(R.id.story_view_value_title);
 		bodyTV = (TextView) getView().findViewById(R.id.story_view_value_body);
-		audioButton = (Button) getView().findViewById(
-				R.id.story_view_value_audio_link);
-		videoLinkView = (VideoView) getView().findViewById(
-				R.id.story_view_value_video_link);
-		imageNameTV = (TextView) getView().findViewById(
-				R.id.story_view_value_image_name);
-		imageMetaDataView = (ImageView) getView().findViewById(
-				R.id.story_view_value_image_meta_data);
-		storyTimeTV = (TextView) getView().findViewById(
-				R.id.story_view_value_story_time);
-		latitudeTV = (TextView) getView().findViewById(
-				R.id.story_view_value_latitude);
-		longitudeTV = (TextView) getView().findViewById(
-				R.id.story_view_value_longitude);
-
+		
 		titleTV.setText("" + "");
 		bodyTV.setText("" + "");
-		imageNameTV.setText("" + "");
-		storyTimeTV.setText("" + 0);
-		latitudeTV.setText("" + 0);
-		longitudeTV.setText("" + 0);
-
+	
 		editButton = (Button) getView().findViewById(
 				R.id.button_story_view_to_edit);
 		deleteButton = (Button) getView().findViewById(
@@ -230,16 +206,16 @@ public class StoryViewFragment extends Fragment {
 			final Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), Uri.parse(audioLinkPath));
 			
 			
-			audioButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					
-					// Play the ringtone
-					ringtone.play();
-
-					
-				}
-			});
+			//audioButton.setOnClickListener(new OnClickListener() {
+			//	@Override
+			//	public void onClick(View v) {
+			//		
+			//		// Play the ringtone
+			//		ringtone.play();
+			//
+			//		
+			//	}
+			//});
 			
 			// Display the video 
 			
@@ -269,20 +245,20 @@ public class StoryViewFragment extends Fragment {
 			
 			// Display the image data
 			
-			imageNameTV.setText(String.valueOf(storyData.imageName).toString());
+			//imageNameTV.setText(String.valueOf(storyData.imageName).toString());
 			
 			String imageMetaDataPath = String.valueOf(storyData.imageLink).toString();
 			
 			// Set the URI of the ImageView to the image path stored in the string
 			// imageMetaDataPath, using the setImageURI function from the ImageView
-			imageMetaDataView.setImageURI(Uri.parse(imageMetaDataPath));
+			//imageMetaDataView.setImageURI(Uri.parse(imageMetaDataPath));
 			
 			
-			Long time = Long.valueOf(storyData.storyTime);
-			storyTimeTV.setText(StoryData.FORMAT.format(time));
+			//Long time = Long.valueOf(storyData.storyTime);
+			//storyTimeTV.setText(StoryData.FORMAT.format(time));
 			
-			latitudeTV.setText(Double.valueOf(storyData.latitude).toString());
-			longitudeTV.setText(Double.valueOf(storyData.longitude).toString());
+			//latitudeTV.setText(Double.valueOf(storyData.latitude).toString());
+			//longitudeTV.setText(Double.valueOf(storyData.longitude).toString());
 		}
 	}
 

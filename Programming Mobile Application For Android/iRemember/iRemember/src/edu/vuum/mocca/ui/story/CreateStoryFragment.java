@@ -333,7 +333,6 @@ public class CreateStoryFragment extends Fragment {
 		Log.d(LOG_TAG, "setLocation =" + location);
 		loc = location;
 		locationButton.setBackgroundResource(R.xml.custom_button_add_green);
-
 	}
 	
 	static void setStringDate(int year, int monthOfYear, int dayOfMonth){

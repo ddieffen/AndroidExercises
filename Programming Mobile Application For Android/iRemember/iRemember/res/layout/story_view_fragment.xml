@@ -53,201 +53,133 @@ University of Maryland to appear in their names.
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
 
-   <ScrollView 
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="640dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="55dp" >
+   <ScrollView
+       android:id="@+id/scrollView1"
+       android:layout_width="match_parent"
+       android:layout_height="640dp"
+       android:layout_above="@+id/button_story_view_to_edit"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true" >
 
-      <RelativeLayout 
-	  android:id="@+id/StoryViewRelativeLayout"
-	  android:layout_width="match_parent"
-	  android:layout_height="wrap_content"
-	  android:orientation="horizontal" >
+      <RelativeLayout
+          android:id="@+id/StoryViewRelativeLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal" >
 
-	  <!-- title -->
-	    <TextView
-	            android:id="@+id/story_view_label_title"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_title"
-	            android:layout_alignBottom="@+id/story_view_value_title"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_title"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <TextView
-	            android:id="@+id/story_view_value_title"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_story_id"
-	            android:text="@string/story_view_edittext_title_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  <!-- body -->
-	    <TextView
-	            android:id="@+id/story_view_label_body"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_body"
-	            android:layout_alignBottom="@+id/story_view_value_body"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_body"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <TextView
-	            android:id="@+id/story_view_value_body"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_title"
-	            android:text="@string/story_view_edittext_body_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  <!-- audioLink -->
-	    <TextView
-	            android:id="@+id/story_view_label_audio_link"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_audio_link"
-	            android:layout_alignBottom="@+id/story_view_value_audio_link"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_audio_link"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <Button
-	            android:id="@+id/story_view_value_audio_link"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_body"
-	            android:text="@string/story_view_edittext_audio_link_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  <!-- videoLink -->
-	    <TextView
-	            android:id="@+id/story_view_label_video_link"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_video_link"
-	            android:layout_alignBottom="@+id/story_view_value_video_link"  
-	            android:paddingBottom="206dp"
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_video_link"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <VideoView
-	            android:id="@+id/story_view_value_video_link"
-	            android:layout_width="fill_parent"
-	            android:layout_height="200dp"
-	            android:layout_alignParentRight="true"
-	            android:layout_marginTop="10dp"
-	            android:layout_below="@+id/story_view_value_audio_link" />   
-	  <!-- imageName -->
-	    <TextView
-	            android:id="@+id/story_view_label_image_name"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_image_name"
-	            android:layout_alignBottom="@+id/story_view_value_image_name"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_image_name"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <TextView
-	            android:id="@+id/story_view_value_image_name"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_video_link"
-	            android:text="@string/story_view_edittext_image_name_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  <!-- imageMetaData -->
-	    <TextView
-	            android:id="@+id/story_view_label_image_meta_data"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_image_meta_data"
-	            android:layout_alignBottom="@+id/story_view_value_image_meta_data"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_image_meta_data"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <ImageView
-	            android:id="@+id/story_view_value_image_meta_data"
-	            android:src="@drawable/ic_launcher"
-	            android:layout_width="220dp"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_image_name"
-	            android:text="@string/story_view_edittext_image_meta_data_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  <!-- tags -->   
-	  <!-- creationTime -->
-   
-	  <!-- storyTime -->
-	    <TextView
-	            android:id="@+id/story_view_label_story_time"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_story_time"
-	            android:layout_alignBottom="@+id/story_view_value_story_time"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_story_time"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
+          <!-- title -->
+          <!-- body -->
+          <!-- audioLink -->
+          <!-- videoLink -->
+          <!-- imageName -->
+          <!-- imageMetaData -->
+          <!-- tags -->
+          <!-- creationTime -->
 
-	    <TextView
-	        android:id="@+id/story_view_value_story_time"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_below="@+id/story_view_value_image_meta_data"
-	        android:text="@string/story_view_edittext_story_time_default_value"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
-   
-	  <!-- latitude -->
-	    <TextView
-	            android:id="@+id/story_view_label_latitude"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_latitude"
-	            android:layout_alignBottom="@+id/story_view_value_latitude"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_latitude"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <TextView
-	            android:id="@+id/story_view_value_latitude"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_story_time"
-	            android:text="@string/story_view_edittext_latitude_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  <!-- longitude -->
-	    <TextView
-	            android:id="@+id/story_view_label_longitude"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
-	            android:layout_alignBaseline="@+id/story_view_value_longitude"
-	            android:layout_alignBottom="@+id/story_view_value_longitude"   
-	            android:layout_gravity="left"
-	            android:text="@string/story_view_label_longitude"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />  
-	    <TextView
-	            android:id="@+id/story_view_value_longitude"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_below="@+id/story_view_value_latitude"
-	            android:text="@string/story_view_edittext_longitude_default_value"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />   
-	  
 
+          <!-- storyTime -->
+
+          <!-- latitude -->
+          <!-- longitude -->
+
+          <TextView
+              android:id="@+id/story_view_value_title"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_alignParentRight="true"
+              android:layout_alignParentTop="true"
+              android:paddingLeft="10dp"
+              android:text="@string/story_view_edittext_title_default_value"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/story_view_value_body"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_alignParentRight="true"
+              android:layout_below="@+id/story_view_value_title"
+              android:lines="4"
+              android:paddingLeft="10dp"
+              android:text="@string/story_view_edittext_body_default_value"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <VideoView
+              android:id="@+id/story_view_value_video_link"
+              android:layout_width="fill_parent"
+              android:layout_height="200dp"
+              android:layout_alignParentLeft="true"
+              android:layout_below="@+id/story_view_value_body"
+              android:layout_marginTop="18dp" />
+
+          <RelativeLayout
+              android:id="@+id/controls_relative_layout"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="10dp"
+              android:gravity="center"
+              android:orientation="horizontal" 
+              android:layout_below="@+id/story_view_value_video_link">
+
+              <ImageButton
+                  android:id="@+id/story_create_value_video_button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:background="@xml/custom_button_add_blue"
+                  android:contentDescription="Record Video"
+                  android:onClick="addVideoClicked"
+                  android:src="@drawable/video" />
+
+              <ImageButton
+                  android:id="@+id/story_create_value_location_button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentTop="true"
+                  android:layout_marginLeft="10dp"
+                  android:layout_toRightOf="@+id/story_create_value_video_button"
+                  android:background="@xml/custom_button_add_blue"
+                  android:contentDescription="Get Location"
+                  android:onClick="getLocationClicked"
+                  android:src="@drawable/location" />
+
+              <ImageButton
+                  android:id="@+id/story_create_value_image_button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentTop="true"
+                  android:layout_marginLeft="10dp"
+                  android:layout_toRightOf="@+id/story_create_value_location_button"
+                  android:background="@xml/custom_button_add_blue"
+                  android:contentDescription="Take Picture"
+                  android:onClick="addPhotoClicked"
+                  android:src="@drawable/camera" />
+
+              <ImageButton
+                  android:id="@+id/story_view_audio_link"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentTop="true"
+                  android:layout_marginLeft="10dp"
+                  android:layout_toRightOf="@+id/story_create_value_image_button"
+                  android:background="@xml/custom_button_add_blue"
+                  android:contentDescription="Select Audio"
+                  android:onClick="addAudioClicked"
+                  android:src="@drawable/music" />
+          </RelativeLayout>
+
+          <ImageButton
+              android:id="@+id/button1"
+              android:layout_width="150dp"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/controls_relative_layout"
+              android:layout_centerHorizontal="true"
+  			  android:contentDescription="Play Media"
+              android:background="@xml/custom_button_add_blue"
+              android:src="@drawable/play"/>
 
       </RelativeLayout>
+
   </ScrollView>
 
     <Button
@@ -258,8 +190,13 @@ University of Maryland to appear in their names.
         android:layout_alignParentBottom="true"
         android:layout_marginTop="26dp"
         android:padding="3dp"
+        android:background="@xml/custom_button_add_blue"
         android:text="@string/story_view_button_label_edit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18dp"/>
 
     <Button
         android:id="@+id/button_story_view_to_delete"
@@ -269,7 +206,12 @@ University of Maryland to appear in their names.
         android:layout_alignBottom="@+id/button_story_view_to_edit"
         android:layout_alignParentRight="true"
         android:padding="3dp"
+        android:background="@xml/custom_button_add_blue"
         android:text="@string/story_view_button_label_delete"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18dp"/>
 
 </RelativeLayout>
