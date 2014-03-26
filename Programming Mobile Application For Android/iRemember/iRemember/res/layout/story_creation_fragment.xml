@@ -121,7 +121,7 @@ University of Maryland to appear in their names.
                     android:contentDescription="Record Video"
                     android:onClick="addVideoClicked"
                     android:src="@drawable/video" 
-                    android:background="@xml/custom_button_add"/>
+                    android:background="@xml/custom_button_add_blue"/>
 
                 <ImageButton
                     android:id="@+id/story_create_value_location_button"
@@ -132,7 +132,7 @@ University of Maryland to appear in their names.
                     android:contentDescription="Get Location"
                     android:onClick="getLocationClicked"
                     android:src="@drawable/location" 
-                    android:background="@xml/custom_button_add"
+                    android:background="@xml/custom_button_add_blue"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageButton
@@ -144,7 +144,7 @@ University of Maryland to appear in their names.
                     android:contentDescription="Take Picture"
                     android:onClick="addPhotoClicked"
                     android:src="@drawable/camera"
-                    android:background="@xml/custom_button_add" 
+                    android:background="@xml/custom_button_add_blue" 
                     android:layout_marginLeft="10dp"/>
 
                 <ImageButton
@@ -156,7 +156,7 @@ University of Maryland to appear in their names.
                     android:contentDescription="Record Audio"
                     android:onClick="addAudioClicked"
                     android:src="@drawable/microphone" 
-                    android:background="@xml/custom_button_add"
+                    android:background="@xml/custom_button_add_blue"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageView
@@ -165,7 +165,7 @@ University of Maryland to appear in their names.
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/story_create_value_audio_link"
-                    android:background="@xml/custom_button_add"
+                    android:background="@xml/custom_button_add_blue"
                     android:contentDescription="Set Date"
                     android:onClick="getDateClicked"
                     android:src="@drawable/calendar"
@@ -222,7 +222,7 @@ University of Maryland to appear in their names.
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@xml/custom_button_add"
+        android:background="@xml/custom_button_add_blue"
         android:layout_marginLeft="32dp"
         android:text="@string/story_create_button_label_create" 
         android:textStyle="bold"
@@ -236,7 +236,7 @@ University of Maryland to appear in their names.
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@xml/custom_button_add"
+        android:background="@xml/custom_button_add_blue"
         android:text="@string/story_create_button_label_clear"
         android:textStyle="bold"
         android:textColor="@color/white" 
@@ -250,7 +250,7 @@ University of Maryland to appear in their names.
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="21dp"
-        android:background="@xml/custom_button_add"
+        android:background="@xml/custom_button_add_blue"
         android:text="@string/story_create_button_label_cancel"
         android:textStyle="bold"
         android:textColor="@color/white"

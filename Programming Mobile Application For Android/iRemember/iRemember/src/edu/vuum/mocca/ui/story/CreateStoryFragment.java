@@ -100,11 +100,13 @@ public class CreateStoryFragment extends Fragment {
 	Uri fileUri;
 	String audioPath;
 	Location loc;
-	static String storyTimeET;
+	static String storyTimeET = "";
 
 	// int index;
 	OnOpenWindowInterface mOpener;
 	MoocResolver resolver;
+	
+	Uri imagePathFinal = null;
 
 	public final static String LOCATION = "story";
 
@@ -162,10 +164,8 @@ public class CreateStoryFragment extends Fragment {
 				R.id.story_create_value_image_name);
 		imageCaptureButton = (ImageButton) getView().findViewById(
 				R.id.story_create_value_image_button);
-		
 		locationButton = (ImageButton) getView().findViewById(
 				R.id.story_create_value_location_button);
-
 		buttonClear = (Button) getView().findViewById(
 				R.id.story_create_button_reset);
 		buttonCancel = (Button) getView().findViewById(
@@ -179,6 +179,15 @@ public class CreateStoryFragment extends Fragment {
 				titleET.setText("" + "");
 				bodyET.setText("" + "");
 				imageNameET.setText("" + "");
+				locationButton.setBackgroundResource(R.xml.custom_button_add_blue);
+				imageCaptureButton.setBackgroundResource(R.xml.custom_button_add_blue);
+				videoCaptureButton.setBackgroundResource(R.xml.custom_button_add_blue);
+				date = new Date();
+				storyTimeET = "";
+				audioPath = null;
+				fileUri = null;
+				imagePathFinal = null;
+				loc = null;
 			}
 		});
 
@@ -277,7 +286,7 @@ public class CreateStoryFragment extends Fragment {
 
 	}
 
-	Uri imagePathFinal = null;
+	
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -287,7 +296,7 @@ public class CreateStoryFragment extends Fragment {
 			if (resultCode == CreateStoryActivity.RESULT_OK) {
 				// Image captured and saved to fileUri specified in the Intent
 				imagePathFinal = imagePath;
-
+				imageCaptureButton.setBackgroundResource(R.xml.custom_button_add_green);
 			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
@@ -298,7 +307,7 @@ public class CreateStoryFragment extends Fragment {
 				// Image captured and saved to fileUri specified in the Intent
 				// fileUriFinal = fileUri;
 				fileUri = data.getData();
-
+				videoCaptureButton.setBackgroundResource(R.xml.custom_button_add_green);
 			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
@@ -310,6 +319,7 @@ public class CreateStoryFragment extends Fragment {
 				// Image captured and saved to fileUri specified in the Intent
 				// fileUriFinal = fileUri;
 				audioPath = (String) data.getExtras().get("data");
+				audioCaptureButton.setBackgroundResource(R.xml.custom_button_add_green);
 			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
@@ -322,6 +332,7 @@ public class CreateStoryFragment extends Fragment {
 	public void setLocation(Location location) {
 		Log.d(LOG_TAG, "setLocation =" + location);
 		loc = location;
+		locationButton.setBackgroundResource(R.xml.custom_button_add_green);
 
 	}
 	
